@@ -66,6 +66,7 @@ class IEC61107:
         self.transport = transport
         
     def init_session(self, address = None):
+        self.transport.open()
         self.transport.send(StartSymbol)
         self.transport.send(ReqSymbol)
         if address is not None:
@@ -189,10 +190,17 @@ class TCP_transport:
     remains = None
     softparity = True
     def __init__(self,address,port,emulateparity = True):
+        self.opened = False
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.sock.connect((address,port))
-        self.sock.settimeout(10.0)
-        self.softparity = emulateparity
+        self.address = address
+        self.port = port
+    
+    def open(self):
+        if self.opened == False:
+            self.sock.connect((self.address,self.port))
+            self.sock.settimeout(10.0)
+            self.softparity = emulateparity
+            self.opened = True
     
     def send(self, bytes_snd):
         if self.softparity == True:
@@ -258,12 +266,14 @@ class TCP_transport:
         
     def close(self):
         self.sock.close()
+        self.opened = False
 
         
 class Serial_transport:
     remains = None
     softparity = False
     def __init__(self,port,baudrate,use8bits=False):
+        self.opened = False
         if use8bits == False:
             #Open serial in 7-E-1 mode
             self.softparity = False;
@@ -274,6 +284,12 @@ class Serial_transport:
             self.softparity = True
             self.serial_port = serial.Serial(port, baudrate, timeout=10.0,
                                      parity=serial.PARITY_NONE, bytesize=serial.EIGHTBITS)
+    
+    def open(self):
+        if not self.opened:
+            self.serial_port.open()
+            self.opened = True
+       
     def send(self, bytes_snd):
         if self.softparity == True:
             paritybytes = bytearray()
@@ -332,6 +348,9 @@ class Serial_transport:
                     break
 
         return total_data
+        
     def close(self):
-        self.serial_port.close()
+        if self.opened :
+            self.serial_port.close()
+            self.opened = False
     
