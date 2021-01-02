@@ -1,11 +1,11 @@
-from ce301 import CE301
-from ce301 import TCP_transport
-from ce301 import Serial_transport
+from IEC61107 import IEC61107
+from IEC61107 import TCP_transport
+from IEC61107 import Serial_transport
 
 transport = TCP_transport('192.168.7.3', 12345)
 #transport = Serial_transport('COM3',9600,use8bits=True)
 
-mymeter = CE301(transport)
+mymeter = IEC61107(transport)
 
 vendor, model = mymeter.init_session('155390511')
 print (vendor + ' ' + model)
@@ -16,11 +16,11 @@ mymeter.end_session()
 
 
 
-vendor, model = mymeter.init_session('155390511')
-print (vendor + ' ' + model)
+# vendor, model = mymeter.init_session('155390511')
+# print (vendor + ' ' + model)
 
-addr = mymeter.program_mode()
-print(addr)
+# addr = mymeter.program_mode()
+# print(addr)
 
 #active_energy = mymeter.read_param('ET0PE')
 # voltages = mymeter.read_param('VOLTA')

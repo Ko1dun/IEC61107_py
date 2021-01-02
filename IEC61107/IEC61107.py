@@ -60,7 +60,7 @@ def parse_name_param_array(str):
         params.append([name,par])
     return params
 
-class CE301:
+class IEC61107:
     baudrate = None
     def __init__(self, transport):
         self.transport = transport
