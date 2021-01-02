@@ -1,6 +1,6 @@
-from IEC61107 import IEC61107
-from IEC61107 import TCP_transport
-from IEC61107 import Serial_transport
+from IEC61107.IEC61107 import IEC61107
+from IEC61107.IEC61107 import TCP_transport
+from IEC61107.IEC61107 import Serial_transport
 
 transport = TCP_transport('192.168.7.3', 12345)
 #transport = Serial_transport('COM3',9600,use8bits=True)
