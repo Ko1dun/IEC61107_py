@@ -99,4 +99,7 @@ See following python example
 	print (max_power)
 	print (m_time)
 	print (m_date)
+	
+	#gracefuly close serial or network port  
+	mymeter.close()
 ```
