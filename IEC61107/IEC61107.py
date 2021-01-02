@@ -173,6 +173,9 @@ class IEC61107:
         self.transport.send(bytes(self.baudrate,'ascii'))
         self.transport.send(bytes('1', 'ascii')) #program mode
         self.transport.send(EndMsg)
+        
+    def close(self):
+        self.transport.close()
 
 
 def parity_calc(n):
@@ -253,6 +256,10 @@ class TCP_transport:
             
         return total_data
         
+    def close(self):
+        self.sock.close()
+
+        
 class Serial_transport:
     remains = None
     softparity = False
@@ -325,5 +332,6 @@ class Serial_transport:
                     break
 
         return total_data
-
+    def close(self):
+        self.serial_port.close()
     
