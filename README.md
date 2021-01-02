@@ -33,11 +33,12 @@ Usage
 -----
 See following python example
 ```python
-    from IEC61107 import IEC61107
-	from IEC61107 import TCP_transport
-	from IEC61107 import Serial_transport
 
-#create transport matching you connection method
+    from IEC61107.IEC61107 import IEC61107
+	from IEC61107.IEC61107 import TCP_transport
+	from IEC61107.IEC61107 import Serial_transport
+
+	#create transport matching you connection method
 	transport = Serial_transport('COM3',9600,use8bits=True)
 	#for serial devices not supporting 7 bit mode set 
 	#use8bits = True
