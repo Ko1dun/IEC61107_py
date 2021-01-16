@@ -3,7 +3,7 @@ from os.path import join, dirname
 
 setup(
     name='IEC61107',
-    version='0.1',
+    version='0.1.1',
     author="Example Author",
     author_email="author@example.com",
     description="Smart meter interface library",

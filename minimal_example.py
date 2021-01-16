@@ -9,4 +9,4 @@ data = mymeter.general_read()
 mymeter.end_session()
 mymeter.close()
 
-print ("Total energy(kWh): " + data[0])
+print ("Total energy(kWh): " + data[0][1])
