@@ -191,13 +191,13 @@ class TCP_transport:
     softparity = True
     def __init__(self,address,port,emulateparity = True):
         self.opened = False
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.address = address
         self.port = port
         self.softparity = emulateparity
     
     def open(self):
         if self.opened == False:
+            self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.sock.connect((self.address,self.port))
             self.sock.settimeout(10.0)
             self.opened = True
