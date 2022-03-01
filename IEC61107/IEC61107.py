@@ -279,11 +279,13 @@ class Serial_transport:
             self.softparity = False;
             self.serial_port = serial.Serial(port, baudrate, timeout=10.0,
                         parity=serial.PARITY_EVEN, bytesize=serial.SEVENBITS )
+            self.opened = True
         else:
             #open in 8-N-1 mode and calculate parity in software
             self.softparity = True
             self.serial_port = serial.Serial(port, baudrate, timeout=10.0,
                                      parity=serial.PARITY_NONE, bytesize=serial.EIGHTBITS)
+            self.opened = True
     
     def open(self):
         if not self.opened:
