@@ -332,6 +332,9 @@ class Serial_transport:
         total_data = bytearray()
         while True:
             data_noparity = self.rcv()
+            
+            if len(data_noparity) == 0:
+                raise TimeoutError('No data received');
 
             if End in data_noparity:
                 endplace = data_noparity.find(End)
